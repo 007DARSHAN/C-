@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class FamilyMember {
+protected:
+    string name;
+public:
+    FamilyMember(string _name) : name(_name) {}
+    virtual void display() {
+        cout << "Name: " << name << endl;
+    }
+};
+
+class Father : public FamilyMember {
+protected:
+    double propertyValue;
+public:
+    Father(string _name, double _propertyValue) : FamilyMember(_name), propertyValue(_propertyValue) {}
+    void display() override {
+        cout << "Father - ";
+        FamilyMember::display();
+        cout << "Property Value: $" << propertyValue << endl;
+    }
+    double getProperty() const {
+        return propertyValue;
+    }
+};
+
+class Son : public Father {
+public:
+    Son(string _name, double _propertyValue) : Father(_name, _propertyValue) {}
+    void display() override {
+        cout << "Son - ";
+        FamilyMember::display();
+        cout << "Inherited Property Value: $" << getProperty() << endl;
+    }
+};
+
+class Grandson : public Son {
+public:
+    Grandson(string _name, double _propertyValue) : Son(_name, _propertyValue) {}
+    void display() override {
+        cout << "Grandson - ";
+        FamilyMember::display();
+        cout << "Inherited Property Value: $" << getProperty() << endl;
+    }
+};
+
+int main() {
+    Father father("John Sr.", 500000);
+    Son son("John Jr.", father.getProperty());
+    Grandson grandson("John III", son.getProperty());
+
+    father.display();
+    son.display();
+    grandson.display();
+
+    return 0;
+}
