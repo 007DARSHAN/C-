@@ -1,0 +1,42 @@
+#include <iostream>
+
+// Base class
+class Shape {
+public:
+    // Virtual function
+    virtual void draw() {
+        std::cout << "Drawing a shape." << std::endl;
+    }
+};
+
+// Derived class
+class Circle : public Shape {
+public:
+    // Override the draw function
+    void draw() override {
+        std::cout << "Drawing a circle." << std::endl;
+    }
+};
+
+// Another derived class
+class Square : public Shape {
+public:
+    // Override the draw function
+    void draw() override {
+        std::cout << "Drawing a square." << std::endl;
+    }
+};
+
+int main() {
+    Shape* shape1 = new Circle();
+    Shape* shape2 = new Square();
+
+    // Call the draw function for each shape
+    shape1->draw(); // Output: Drawing a circle.
+    shape2->draw(); // Output: Drawing a square.
+
+    delete shape1;
+    delete shape2;
+
+    return 0;
+}
