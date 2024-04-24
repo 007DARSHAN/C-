@@ -1,0 +1,26 @@
+#include <iostream>
+
+void divide(int numerator, int denominator) {
+    if (denominator == 0) {
+        throw std::invalid_argument("Division by zero error");
+    }
+    std::cout << "Result of division: " << numerator / denominator << std::endl;
+}
+
+int main() {
+    int numerator, denominator;
+
+    std::cout << "Enter numerator: ";
+    std::cin >> numerator;
+
+    std::cout << "Enter denominator: ";
+    std::cin >> denominator;
+
+    try {
+        divide(numerator, denominator);
+    } catch (const std::invalid_argument& e) {
+        std::cerr << "Exception caught: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
