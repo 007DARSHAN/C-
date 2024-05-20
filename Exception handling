@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+// Custom exception class
+class MyException : public exception {
+public:
+    virtual const char* what() const throw() {
+        return "My custom exception occurred!";
+    }
+};
+
+int main() {
+    try {
+        // Code that might throw an exception
+        int a, b;
+        cout << "Enter two numbers: ";
+        cin >> a >> b;
+        
+        if (b == 0) {
+            throw runtime_error("Division by zero error.");
+        }
+
+        if (a < 0 || b < 0) {
+            throw MyException();
+        }
+
+        cout << "Result of division: " << a / b << endl;
+    }
+    catch (const runtime_error& e) {
+        cout << "Exception caught: " << e.what() << endl;
+    }
+    catch (const MyException& e) {
+        cout << "Custom exception caught: " << e.what() << endl;
+    }
+    catch (...) {
+        cout << "An unknown exception occurred." << endl;
+    }
+
+    return 0;
+}
