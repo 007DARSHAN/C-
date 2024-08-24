@@ -1,0 +1,24 @@
+#include <iostream>
+#include <stdexcept>  // for std::runtime_error
+
+// Function that might throw an exception
+void mightGoWrong() {
+    bool errorOccurred = true; // Simulate an error
+    if (errorOccurred) {
+        throw std::runtime_error("Something went wrong!");
+    }
+}
+
+int main() {
+    try {
+        mightGoWrong(); // Call the function that might throw an exception
+    } catch (const std::runtime_error& e) {
+        std::cout << "Caught an exception: " << e.what() << std::endl;
+    } catch (...) {
+        std::cout << "Caught an unknown exception." << std::endl;
+    }
+
+    std::cout << "Program continues..." << std::endl;
+
+    return 0;
+}
